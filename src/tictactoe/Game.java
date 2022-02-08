@@ -23,27 +23,32 @@ public class Game {
     public void start() throws InterruptedException {
 
         // Initialize Variables
-        boolean first = RANDOM.nextBoolean();
         Player player = new Player();
         Computer comp = new Computer();
         order = new Entity[2];
+
         running = true;
+        boolean first = RANDOM.nextBoolean();
 
         // Prints the instructions
         Board.reset();
         Board.printInstructions();
 
-        // Wait 3 seconds for player to read instructions
-        Thread.sleep(3000);
+        // Wait 5 seconds for player to read instructions
+        Thread.sleep(5000);
 
         // Determine order
         if (first) {
             order[0] = player;
             order[1] = comp;
+            ComputerAI.player = Piece.X;
+            ComputerAI.comp = Piece.O;
             print("You will go first\n");
         } else {
             order[0] = comp;
             order[1] = player;
+            ComputerAI.player = Piece.O;
+            ComputerAI.comp = Piece.X;
             print("Computer will go first\n");
         }
         gameControl();
@@ -73,6 +78,9 @@ public class Game {
     }
 
     private boolean takeTurn(Entity e, Piece p) {
+
+        Game.print(e + "'s turn");
+
         int input = e.takeTurn();
         Board.addPiece(p, input);
         Board.printCurrent();

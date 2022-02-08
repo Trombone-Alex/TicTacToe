@@ -15,7 +15,8 @@ public class Player implements Entity {
      * Returns the player's input if the input is valid
      */
     public int takeTurn() {
-        int input = -1;
+
+        int input;
 
         do {
             Game.print("Please enter a number:\n");
@@ -24,7 +25,7 @@ public class Player implements Entity {
             if (input < 0 || input > 8) {
                 Game.print("The number must be between 1 and 9\n");
                 input = -1;
-            } else if (!Board.isValid(input)) {
+            } else if (Board.notValid(input)) {
                 Game.print("There is already a piece there\n");
                 input = -1;
             }

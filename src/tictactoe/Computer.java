@@ -11,14 +11,15 @@ public class Computer implements Entity {
      */
     public int takeTurn() {
 
-        int slot = Board.findOveride();
+        int slot = ComputerAI.findOverride();
 
         if(slot != -1)
             return slot;
 
+        // No Override, choose random number
         do {
             slot = random.nextInt(9);
-        } while (!Board.isValid(slot));
+        } while (Board.notValid(slot));
 
         return slot;
     }
